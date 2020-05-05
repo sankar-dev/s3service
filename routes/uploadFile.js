@@ -21,6 +21,12 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", upload, (req, res) => {
+    if(!req.files)
+    {
+        res.send("File was not found");
+        return;
+    }
+    
     const file = req.files;
 
     let s3bucket = new AWS.S3({
